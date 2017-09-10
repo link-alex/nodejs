@@ -1,0 +1,29 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Hometasks for nodejs mentoring program",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/link-alex/nodejs.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "link-alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/link-alex/nodejs/issues"
+  },
+  "homepage": "https://github.com/link-alex/nodejs#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0"
+  }
+}
