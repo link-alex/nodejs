@@ -73,4 +73,4 @@ function convertCSVToJSON(data) {
     return JSON.stringify(result);
 }
 
-export { convertCSVToJSON };
+module.exports = { convertCSVToJSON };
