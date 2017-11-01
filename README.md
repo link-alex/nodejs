@@ -53,7 +53,7 @@ curl -X GET --cookie "cookieName=cookieValue;name2=v2" http://127.0.0.1:8080/api
 curl -X GET http://127.0.0.1:8080/api/users/\?Param1\=VALUE\&SECOND\=1 // check server console for parsed query (parsing makes it lower case)
 ```
 
-### Tasks 8 API:
+### Task 8 API:
 
 ```
 npm run start
@@ -67,7 +67,7 @@ curl -X GET http://127.0.0.1:8080/api/products/2/
 
 // Return ALL reviews for a single product
 curl -X GET http://127.0.0.1:8080/api/products/1/reviews
-curl -X GET http://127.0.0.1:8080/api/products/1/reviews
+curl -X GET http://127.0.0.1:8080/api/products/2/reviews
 
 // Add NEW product and return it
 curl -X POST -d '{"name":"Bike", "brand": "Dike", "price": "1000"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/products
