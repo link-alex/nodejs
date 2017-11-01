@@ -70,7 +70,9 @@ curl -X GET http://127.0.0.1:8080/api/products/1/reviews
 curl -X GET http://127.0.0.1:8080/api/products/1/reviews
 
 // Add NEW product and return it
-curl -X POST -d '{"name":"Bike", "brand": "Dike", "price": "1000"}' --cookie "cookieName=cookieValue;n2=v2" -H "Content-Type: application/json" http://127.0.0.1:8080/api/products
+curl -X POST -d '{"name":"Bike", "brand": "Dike", "price": "1000"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/products
+// check All products now
+curl -X GET http://127.0.0.1:8080/api/products/
 
 // Return ALL users
 curl -X GET http://127.0.0.1:8080/api/users/
