@@ -1,80 +1,49 @@
 ## Repository for node.js homework
 
-# Demo of HomeWork 4:
+# Demo of HomeWork 5:
 
 ```
 npm i
+npm start
 
 ```
 
-### Tasks 1a - 1i:
+### Tasks 1 - 3:
 
-To start all 4 servers concurrently:
+Incorrect username or password to check error
 ```
-npm run startHttpServers
-```
-Or:
-
-1. plain text server
-```
-npm run startPlainTextServer
-
-curl -X GET http://127.0.0.1:3000
+curl -X POST -d '{"username":"admin", "password": "adminilinet"}' -H "Content-Type: application/json" http://127.0.0.1:8080/auth
 ```
 
-2. Html server
+Correct request to get jwt token (will expire in 1 min)
 ```
-npm run startHtmlServer
-
-curl -X GET http://127.0.0.1:3001
+curl -X POST -d '{"username":"admin", "password": "admin"}' -H "Content-Type: application/json" http://127.0.0.1:8080/auth
 ```
 
-3. JSON server
+Use token to get access to products and user
 ```
-npm run startJsonServer
-
-curl -X GET http://127.0.0.1:3002
-```
-
-4. Echo server
-```
-npm run startEchoServer
-
-curl -d 'Message' http://127.0.0.1:3003
+curl -X GET http://127.0.0.1:8080/api/products/?token=PUT_TOKEN_HERE
+curl -X GET http://127.0.0.1:8080/api/users/?token=PUT_TOKEN_HERE
 ```
 
-### Tasks 6-7 Middlewares:
+### Tasks 4 - 6:
 
+Local Strategy to log in using hardcoded credentials
 ```
-npm run start
-
-curl -X GET --cookie "cookieName=cookieValue;name2=v2" http://127.0.0.1:8080/api/products // check server console for parsed cookies (parsing creates an object from cookie string)
-
-curl -X GET http://127.0.0.1:8080/api/users/\?Param1\=VALUE\&SECOND\=1 // check server console for parsed query (parsing makes it lower case)
+curl -X POST -d '{"username":"admin", "password": "admin"}' -H "Content-Type: application/json" http://127.0.0.1:8080/passport/local
 ```
 
-### Task 8 API:
+To test other Strategies, open in browser and login into:
+
+ - Facebook: http://localhost:8080/passport/fb
+ - Twitter:  http://localhost:8080/passport/twitter
+ - Google:   http://localhost:8080/passport/google
+
+ You will be able to login.
+
+ To check that authorization is valid you can use the access token from previous step (Facebook example here only!)
 
 ```
-npm run start
-
-// Return ALL products
-curl -X GET http://127.0.0.1:8080/api/products/
-
-// Return SINGLE product
-curl -X GET http://127.0.0.1:8080/api/products/1/
-curl -X GET http://127.0.0.1:8080/api/products/2/
-
-// Return ALL reviews for a single product
-curl -X GET http://127.0.0.1:8080/api/products/1/reviews
-curl -X GET http://127.0.0.1:8080/api/products/2/reviews
-
-// Add NEW product and return it
-curl -X POST -d '{"name":"Bike", "brand": "Dike", "price": "1000"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/products
-// check All products now
-curl -X GET http://127.0.0.1:8080/api/products/
-
-// Return ALL users
-curl -X GET http://127.0.0.1:8080/api/users/
-
-```
+curl --header "Authorization: PUT_TOKEN_HERE" --request GET localhost:8080/api/users
+curl --header "Authorization: PUT_TOKEN_HERE" --request GET localhost:8080/api/products
+```    

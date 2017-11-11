@@ -1,4 +1,6 @@
 const express = require('express');
+import authMiddleware from '../middlewares/authMiddleware';
+
 const productsRouter = express.Router();
 
 let nextId = 1;
@@ -30,6 +32,8 @@ products.push(formatProduct({
     price: 99.99,
     reviews: []
 }));
+
+productsRouter.use(authMiddleware);
 
 productsRouter.get('/products', function (req, res) {
     const all = JSON.stringify(products);

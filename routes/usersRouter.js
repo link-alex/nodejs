@@ -1,4 +1,6 @@
 const express = require('express');
+import authMiddleware from '../middlewares/authMiddleware';
+
 const usersRouter = express.Router();
 
 const users = [
@@ -15,6 +17,8 @@ const users = [
         email: 'pp@pp.ru'
     }
 ];
+
+usersRouter.use(authMiddleware);
 
 usersRouter.get('/users', function (req, res) {
     const all = JSON.stringify(users);
