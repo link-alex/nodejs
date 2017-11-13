@@ -1,49 +1,47 @@
 ## Repository for node.js homework
 
-# Demo of HomeWork 5:
+# Demo of HomeWork 6:
+
+First steps:
+
+ - [Install Docker Community Edition](https://store.docker.com/search?type=edition&offering=community)
+ - [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+### Tasks 1 - 2:
+
+Start 2 docker images, one with DB and one with server.
+Default docker image with postgres is used.
+Sequelize is used for connection to DB.
 
 ```
-npm i
-npm start
-
+docker-compose up
 ```
 
-### Tasks 1 - 3:
+### Tasks 3 - 6:
 
-Incorrect username or password to check error
+Run migration to create tables using sequelize cli:
+
 ```
-curl -X POST -d '{"username":"admin", "password": "adminilinet"}' -H "Content-Type: application/json" http://127.0.0.1:8080/auth
+node_modules/.bin/sequelize db:migrate
 ```
 
-Correct request to get jwt token (will expire in 1 min)
+Run seeding to fill some data into tables using sequelize cli:
+
+```
+node_modules/.bin/sequelize db:seed:all
+```
+
+### Tasks 7 - 8:
+
+Correct request to get jwt token (will expire in 1 hour)
 ```
 curl -X POST -d '{"username":"admin", "password": "admin"}' -H "Content-Type: application/json" http://127.0.0.1:8080/auth
 ```
 
-Use token to get access to products and user
+Use token to get access to products and user - DB is used now!
 ```
 curl -X GET http://127.0.0.1:8080/api/products/?token=PUT_TOKEN_HERE
+curl -X GET http://127.0.0.1:8080/api/products/1/?token=PUT_TOKEN_HERE
+curl -X GET http://127.0.0.1:8080/api/products/1/reviews/?token=PUT_TOKEN_HERE
 curl -X GET http://127.0.0.1:8080/api/users/?token=PUT_TOKEN_HERE
 ```
-
-### Tasks 4 - 6:
-
-Local Strategy to log in using hardcoded credentials
-```
-curl -X POST -d '{"username":"admin", "password": "admin"}' -H "Content-Type: application/json" http://127.0.0.1:8080/passport/local
-```
-
-To test other Strategies, open in browser and login into:
-
- - Facebook: http://localhost:8080/passport/fb
- - Twitter:  http://localhost:8080/passport/twitter
- - Google:   http://localhost:8080/passport/google
-
- You will be able to login.
-
- To check that authorization is valid you can use the access token from previous step (Facebook example here only!)
-
-```
-curl --header "Authorization: PUT_TOKEN_HERE" --request GET localhost:8080/api/users
-curl --header "Authorization: PUT_TOKEN_HERE" --request GET localhost:8080/api/products
-```    

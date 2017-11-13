@@ -1,5 +1,17 @@
-export default class User {
-    constructor() {
-        console.log('User module');
-    }
-}
+module.exports = (sequelize, DataTypes) => {
+
+    const User = sequelize.define('User', {
+        firstName: DataTypes.STRING,
+        lastName: DataTypes.STRING,
+        login: DataTypes.STRING,
+        password: DataTypes.STRING,
+        email: DataTypes.STRING
+    }, {
+        classMethods: {
+            associate: (models) => {
+                // associations can be defined here
+            }
+        }
+    });
+    return User;
+};
