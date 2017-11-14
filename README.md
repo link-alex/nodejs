@@ -14,6 +14,7 @@ Default docker image with postgres is used.
 Sequelize is used for connection to DB.
 
 ```
+npm i
 docker-compose up
 ```
 
