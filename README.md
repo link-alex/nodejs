@@ -1,13 +1,13 @@
 ## Repository for node.js homework
 
-# Demo of HomeWork 6:
+# Demo of HomeWork 7:
 
 First steps:
 
  - [Install Docker Community Edition](https://store.docker.com/search?type=edition&offering=community)
  - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-### Tasks 1 - 2:
+### Tasks 1 - 3:
 
 Start 2 docker images, one with DB and one with server.
 Default docker image with postgres is used.
@@ -18,31 +18,69 @@ npm i
 docker-compose up
 ```
 
-### Tasks 3 - 6:
+### Task 4:
 
-Run migration to create tables using sequelize cli:
-
-```
-node_modules/.bin/sequelize db:migrate
-```
-
-Run seeding to fill some data into tables using sequelize cli:
+Write a simple web server which will return a random city on every request
 
 ```
-node_modules/.bin/sequelize db:seed:all
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities/random
 ```
 
-### Tasks 7 - 8:
+### Task 5-8:
 
-Correct request to get jwt token (will expire in 1 hour)
+See commit with changes
+
+### Task 9
+
+Add validations for appropriate fields of your models:
+
+See that the following requests fails:
+
 ```
-curl -X POST -d '{"username":"admin", "password": "admin"}' -H "Content-Type: application/json" http://127.0.0.1:8080/auth
+curl -X POST -d '{"name":"Vitebsk"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities // no country
+curl -X POST -d '{"name":"Minsk","country":"Belarus"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities // already
+curl -X POST -d '{"name":"Pinsk","country":"Belarus","lat":"-200"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities // incorrect latitude
 ```
 
-Use token to get access to products and user - DB is used now!
+etc. see full lists in schemas
+
+### Task 10:
+
+Modify application to respond allroutesfrom Homework 4and return data fromthe database
+
+Works with DB:
 ```
-curl -X GET http://127.0.0.1:8080/api/products/?token=PUT_TOKEN_HERE
-curl -X GET http://127.0.0.1:8080/api/products/1/?token=PUT_TOKEN_HERE
-curl -X GET http://127.0.0.1:8080/api/products/1/reviews/?token=PUT_TOKEN_HERE
-curl -X GET http://127.0.0.1:8080/api/users/?token=PUT_TOKEN_HERE
+curl -X GET http://127.0.0.1:8080/api/products/
+
+curl -X GET http://127.0.0.1:8080/api/products/1/
+curl -X GET http://127.0.0.1:8080/api/products/2/
+
+curl -X GET http://127.0.0.1:8080/api/products/1/reviews
+curl -X GET http://127.0.0.1:8080/api/products/2/reviews
+
+curl -X GET http://127.0.0.1:8080/api/users/
 ```
+
+# Task 11:
+
+Add additional routes and make your application responds on them
+
+```
+curl -X DELETE http://127.0.0.1:8080/api/users/2
+
+curl -X DELETE http://127.0.0.1:8080/api/products/2
+
+curl -X GET http://127.0.0.1:8080/api/cities/
+
+curl -X POST -d '{"name":"Pinsk","country":"Belarus"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities
+
+curl -X PUT -d '{"name":"Dzerzhinsk"}' -H "Content-Type: application/json" http://127.0.0.1:8080/api/cities/3
+
+curl -X DELETE http://127.0.0.1:8080/api/cities/3
+```
+
+# Task 12:
+
+Implement a function which will add extra field called lastModifiedDate with the current date for every created/updated item (every PUT and POST request for all user, product and city entities)
+
+lastModifiedDate updated via schema hooks

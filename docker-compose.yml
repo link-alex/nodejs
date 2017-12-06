@@ -1,22 +1,18 @@
 version: '2'
 services:
-  web:
+  web2:
     build: .
-    command: bash -c 'while !</dev/tcp/postgres/5432; do sleep 1; done; npm run start' # wait while postgres is not up
+    command: bash -c 'while !</dev/tcp/mongo/27017; do sleep 1; done; npm run start' # wait while postgres is not up
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: postgres://nodejsuser:nodejspassword@postgres:5432/nodejsdb
-  postgres:
-    image: postgres:9.6.2
+      - mongo
+  mongo:
+    image: mongo
     ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: nodejsuser
-      POSTGRES_DB: nodejsdb
-      POSTGRES_PASSWORD: nodejspassword
+      - "27017:27017"
+    volumes:
+      - /data/db

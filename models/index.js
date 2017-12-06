@@ -1,10 +1,11 @@
 import UserModel from './user';
 import ProductModel from './product';
+import CityModel from './city';
 
-import Sequelize from 'sequelize';
-import db from '../db';
+import { mongoose, autoIncrement } from '../db';
 
-const User = UserModel(db, Sequelize);
-const Product = ProductModel(db, Sequelize);
+const Users = UserModel(mongoose, autoIncrement);
+const Products = ProductModel(mongoose, autoIncrement);
+const Cities = CityModel(mongoose, autoIncrement);
 
-export { User, Product };
+export { Users, Products, Cities };

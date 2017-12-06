@@ -1,14 +1,16 @@
-import Sequelize from 'sequelize';
+const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 
-const sequelize = new Sequelize('postgres://nodejsuser:nodejspassword@postgres:5432/nodejsdb');
+mongoose.connect('mongodb://mongo:27017');
 
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Connection to postgres has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+const db = mongoose.connection;
 
-module.exports = sequelize;
+autoIncrement.initialize(db);
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+    console.log('mongo db connected');
+});
+
+module.exports = { mongoose, autoIncrement };

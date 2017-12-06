@@ -1,19 +1,28 @@
 const express = require('express');
 import authMiddleware from '../middlewares/authMiddleware';
-import { User } from '../models';
+import { Users } from '../models';
 
 const usersRouter = express.Router();
 
-usersRouter.use(authMiddleware);
+// usersRouter.use(authMiddleware);
 
 usersRouter.get('/users', function (req, res) {
-    if (req.parsedQuery) {
-        console.log('parsedQuery', req.parsedQuery);
-    }
+    Users.find({}).then(users => {
+        res.send(users);
+    });
+});
 
-    User.findAll().then(users => {
-        const all = JSON.stringify(users);
-        res.send(all);
+usersRouter.delete('/users/:id', function (req, res) {
+    const id = req.params.id;
+
+    Users.findByIdAndRemove(id, {}, (err) => {
+        // for some reason no error when there is no item with such id
+        // I'd expect error here, but.. works fine with correct id
+        if (err) {
+            res.sendStatus(404);
+        } else {
+            res.json({ message: 'Executed' });
+        }
     });
 });
 

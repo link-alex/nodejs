@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 // routes
 import productsRouter from './routes/productsRouter';
 import usersRouter from './routes/usersRouter';
+import citiesRouter from './routes/citiesRouter';
 
 import authRouter from './routes/authRouter';
 
@@ -29,6 +30,7 @@ expressApp.use('/passport', passportTwitterRouter);
 expressApp.use('/passport', passportGoogleRouter);
 
 expressApp.use('/auth', authRouter);
+expressApp.use('/api', citiesRouter);
 expressApp.use('/api', productsRouter);
 expressApp.use('/api', usersRouter);
 
