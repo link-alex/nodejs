@@ -36,7 +36,7 @@ module.exports = (mongoose, autoIncrement) => {
     const userSchema = mongoose.Schema({
         firstName: String,
         lastName: String,
-        login: { type: String, unique: true },
+        login: { type: String, unique: true, required: true },
         password: { type: String, required: true },
         email: String
     });

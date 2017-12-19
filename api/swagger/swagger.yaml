@@ -1,0 +1,381 @@
+---
+swagger: "2.0"
+info:
+  description: "This is an API for node.js hometasks"
+  version: "1.0.0"
+  title: "Node.js hometasks API"
+  contact:
+    email: "manzhula.alex@gmail.com"
+host: "127.0.0.1:8080"
+basePath: "/"
+tags:
+- name: "users"
+  description: "Calls for users information"
+- name: "products"
+  description: "Calls for products information"
+- name: "cities"
+  description: "Calls for cities information"
+schemes:
+- "http"
+paths:
+  /api/users:
+    get:
+      x-swagger-router-controller: users
+      tags:
+      - "users"
+      summary: "get all the users"
+      description: "Gets all the users from the database"
+      operationId: "getAllUsers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "users returned"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+  /api/users/{id}:
+    delete:
+      x-swagger-router-controller: users
+      tags:
+      - "users"
+      summary: "delete user by id"
+      description: "Delete particular user from database"
+      operationId: "deleteUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of user to delete"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "user deleted"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "user not deleted because not found"
+  /api/cities/random:
+    get:
+      x-swagger-router-controller: cities
+      tags:
+      - "cities"
+      summary: "get random city"
+      description: "Gets random city from the database"
+      operationId: "getRandomCity"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "random city returned"
+          schema:
+            $ref: "#/definitions/City"
+  /api/cities:
+    get:
+      x-swagger-router-controller: cities
+      tags:
+      - "cities"
+      summary: "get all the cities"
+      description: "Gets all the cities from the database"
+      operationId: "getAllCities"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "cities returned"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/City"
+    post:
+      x-swagger-router-controller: cities
+      tags:
+      - "cities"
+      summary: "add new city"
+      description: "Add city to database"
+      operationId: "addCity"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "city data to add"
+        required: true
+        schema:
+          $ref: "#/definitions/City"
+      responses:
+        200:
+          description: "city added"
+          schema:
+            $ref: "#/definitions/City"
+        400:
+          description: "city not added because of error or incomplete data"
+  /api/cities/{id}:
+    x-swagger-router-controller: cities
+    put:
+      tags:
+      - "cities"
+      summary: "update city by id"
+      description: "Update particular city from database"
+      operationId: "updateCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of city to update"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "city data to update"
+        required: true
+        schema:
+          $ref: "#/definitions/City"
+      responses:
+        200:
+          description: "city updated"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+          description: "city not updated because not found"
+    delete:
+      x-swagger-router-controller: cities
+      tags:
+      - "cities"
+      summary: "delete city by id"
+      description: "Delete particular city from database"
+      operationId: "deleteCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of city to delete"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "city deleted"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "city not deleted because not found"
+  /api/products/{id}/reviews:
+    get:
+      x-swagger-router-controller: products
+      tags:
+      - "products"
+      summary: "get revews of the product by product id"
+      description: "Get all the reviews of particular product from database"
+      operationId: "getProductReviewsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of product to get reviews from"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "reviews of product returned"
+          schema:
+            $ref: "#/definitions/ProductReviews"
+        404:
+          description: "product not found"
+  /api/products/{id}:
+    get:
+      x-swagger-router-controller: products
+      tags:
+      - "products"
+      summary: "get the product by id"
+      description: "Get particular product from database"
+      operationId: "getProductById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of product to get"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "product returned"
+          schema:
+            $ref: "#/definitions/Product"
+        404:
+          description: "product not found"
+    delete:
+      x-swagger-router-controller: products
+      tags:
+      - "products"
+      summary: "delete product by id"
+      description: "Delete particular product from database"
+      operationId: "deleteProductById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of product to delete"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "product deleted"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "product not deleted because not found"
+  /api/products:
+    get:
+      x-swagger-router-controller: products
+      tags:
+      - "products"
+      summary: "get all the products"
+      description: "Gets all the products from the database"
+      operationId: "getAllProducts"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "products returned"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+    post:
+      x-swagger-router-controller: products
+      tags:
+      - "products"
+      summary: "add new product"
+      description: "Add product to database"
+      operationId: "addProduct"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "product data to add"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "product added"
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: "product not added because of error or incomplete data"
+definitions:
+  User:
+    type: "object"
+    required:
+    - "login"
+    - "password"
+    properties:
+      firstName:
+        type: "string"
+        example: "Ivan"
+      lastName:
+        type: "string"
+        example: "Ivanov"
+      login:
+        type: "string"
+        example: "ivaaaan"
+      password:
+        type: "string"
+        example: "iv2000an"
+      email:
+        type: "string"
+        example: "ivan@gmail.ivan"
+    example:
+      firstName: "Ivan"
+      lastName: "Ivanov"
+      password: "iv2000an"
+      login: "ivaaaan"
+      email: "ivan@gmail.ivan"
+  City:
+    type: "object"
+    required:
+    - "country"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "Gomel"
+      country:
+        type: "string"
+        example: "Belarus"
+      lastModifiedDate:
+        type: "string"
+        format: "date-time"
+        example: "2017-12-09T14:24:13.329Z"
+      capital:
+        type: "boolean"
+        default: false
+      location:
+        $ref: "#/definitions/City_location"
+    example:
+      country: "Belarus"
+      capital: false
+      lastModifiedDate: "2017-12-09T14:24:13.329Z"
+      name: "Gomel"
+      location:
+        lat: 57.34530000000000171667124959640204906463623046875
+        long: 57.34530000000000171667124959640204906463623046875
+  Product:
+    type: "object"
+    required:
+    - "name"
+    - "price"
+    properties:
+      name:
+        type: "string"
+        example: "SuperShoe"
+      brand:
+        type: "string"
+        example: "Nikes"
+      price:
+        type: "number"
+        example: 99.9899999999999948840923025272786617279052734375
+        minimum: 0
+      reviews:
+        $ref: "#/definitions/ProductReviews"
+    example:
+      reviews: ""
+      price: 99.9899999999999948840923025272786617279052734375
+      name: "SuperShoe"
+      brand: "Nikes"
+  ProductReviews:
+    type: "array"
+    items:
+      type: "string"
+    example: "[\"Nice\",\"Cool\",\"what the hell is that?!\"]"
+  City_location:
+    properties:
+      lat:
+        type: "number"
+        example: 57.34530000000000171667124959640204906463623046875
+        minimum: -90.0
+        maximum: 90.0
+      long:
+        type: "number"
+        example: 57.34530000000000171667124959640204906463623046875
+        minimum: -180.0
+        maximum: 180.0
+    example:
+      lat: 57.34530000000000171667124959640204906463623046875
+      long: 57.34530000000000171667124959640204906463623046875
