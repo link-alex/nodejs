@@ -1,8 +1,0 @@
-{
-  "development": {
-    "username": "nodejsuser",
-    "password": "nodejspassword",
-    "database": "nodejsdb",
-    "dialect": "postgres"
-  }
-}

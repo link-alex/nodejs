@@ -40,8 +40,8 @@ function fillMockData(City) {
 module.exports = (mongoose, autoIncrement) => {
 
     const citySchema = mongoose.Schema({
-        name: { type: String, unique: true },
-        country: String,
+        name: { type: String, unique: true, required: true },
+        country: { type: String, required: true },
         lastModifiedDate: { type: Date, default: Date.now },
         capital: { type: Boolean, default: false },
         location: {

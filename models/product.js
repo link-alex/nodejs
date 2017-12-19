@@ -17,13 +17,7 @@ function fillMockData(Product) {
             brand: 'Juice',
             price: 0.99,
             reviews: ['norm', 'norm?']
-        }),
-        // uncomment to check validation
-        // new Product({
-        //     brand: 'Juice',
-        //     price: -0.99,
-        //     reviews: ['norm', 'norm?']
-        // }),
+        })
     ];
 
     mockData.forEach((product) => {

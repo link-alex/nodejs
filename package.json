@@ -2,14 +2,9 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "Hometasks for nodejs mentoring program",
-  "main": "index.js",
+  "main": "doc.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "startEchoServer": "node ./http-servers/echo-server.js",
-    "startHtmlServer": "node ./http-servers/html-server.js",
-    "startJsonServer": "node ./http-servers/json-server.js",
-    "startPlainTextServer": "node ./http-servers/plain-text-server.js",
-    "startHttpServers": "concurrently --kill-others \"npm run startEchoServer\" \"npm run startHtmlServer\" \"npm run startJsonServer\" \"npm run startPlainTextServer\"",
+    "start": "swagger project start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,9 +40,10 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
-    "pg": "^7.4.0",
-    "pg-hstore": "^2.3.2",
     "request": "^2.83.0",
-    "through2": "^2.0.3"
+    "swagger": "^0.7.5",
+    "swagger-express-mw": "^0.1.0",
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
   }
 }
